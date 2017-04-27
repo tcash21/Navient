@@ -11,10 +11,10 @@ loans$month <- floor_date(loans$Date, 'month')
 
 grouped <- 
   loans %>%
+  group_by(month) %>%
   arrange(month) %>%
-  mutate(principal=sum(Principal), interest = sum(Interest), total = sum(Total))
+  summarise(principal=sum(Principal), interest = sum(Interest), total = sum(Total))
 
-ggplot(grouped, aes(x=month, y=total)) + geom_line()
 
 ## dplyr and reshape2 not playing nicely, coerce to data.frame
 grouped <- data.frame(grouped)
@@ -22,5 +22,7 @@ m <- melt(grouped, measure.vars = c("principal", "interest", "total"))
 m$value <- m$value * -1
 
 sum(subset(m, variable=='interest')[,3])
-sum(subset(m, variable=='total')[,3])
 sum(subset(m, variable=='principal')[,3])
+sum(subset(m, variable=='total')[,3])
+
+ggplot(m, aes(x=month, y=value, colour=variable)) + geom_line()
