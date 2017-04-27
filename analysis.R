@@ -12,8 +12,7 @@ loans$month <- floor_date(loans$Date, 'month')
 grouped <- 
   loans %>%
   arrange(month) %>%
-  mutate(Principal = Principal *-1) %>%
-  mutate(principal=cumsum(Principal), interest = cumsum(Interest), total = cumsum(Total))
+  mutate(principal=sum(Principal), interest = sum(Interest), total = sum(Total))
 
 ggplot(grouped, aes(x=month, y=total)) + geom_line()
 
