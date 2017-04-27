@@ -1,0 +1,9 @@
+{
+    "path" : "~/R/Navient",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
