@@ -25,4 +25,5 @@ sum(subset(m, variable=='interest')[,3])
 sum(subset(m, variable=='principal')[,3])
 sum(subset(m, variable=='total')[,3])
 
-ggplot(m, aes(x=month, y=value, colour=variable)) + geom_line()
+m <- subset(m, value > 0)
+ggplot(m, aes(x=month, y=value, colour=variable)) + geom_smooth()
